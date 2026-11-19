@@ -37,7 +37,7 @@ async function checkConnection() {
   catch (e) { setConnection(false); return false; }
 }
 async function loadStats() {
-  const result = await api("/api/stats.js");
+  const result = await api("https://my-project-acme-e57a1.vercel.app/api/stats");
   const d = result.data;
   $("stat-total").textContent = Number(d.total || 0).toLocaleString();
   Object.keys(collections).forEach(name => {
@@ -56,7 +56,7 @@ async function loadCollection(name=activeCollection, search="") {
   document.querySelectorAll(".nav-item").forEach(b => b.classList.toggle("active", b.dataset.collection === name));
   $("table-wrap").innerHTML = '<div class="empty-state">Loading records...</div>';
   try {
-    const result = await api(`/api/records?collection=${encodeURIComponent(name)}&limit=100&search=${encodeURIComponent(search)}`);
+    const result = await api(`https://my-project-acme-e57a1.vercel.app/api/records?collection=${encodeURIComponent(name)}&limit=100&search=${encodeURIComponent(search)}`);
     currentRecords = result.data || [];
     renderTable();
     $("record-count").textContent = `${currentRecords.length} record${currentRecords.length === 1 ? "" : "s"}`;
@@ -105,7 +105,7 @@ async function saveRecord() {
   catch { toast("Please enter valid JSON."); return; }
   if (!document || Array.isArray(document) || typeof document !== "object") { toast("A record must be a JSON object."); return; }
   const isEdit = editingId !== null;
-  const url = `/api/records?collection=${encodeURIComponent(activeCollection)}${isEdit ? `&id=${encodeURIComponent(editingId)}` : ""}`;
+  const url = `https://my-project-acme-e57a1.vercel.app/api/records?collection=${encodeURIComponent(activeCollection)}${isEdit ? `&id=${encodeURIComponent(editingId)}` : ""}`;
   try {
     await api(url, { method: isEdit ? "PUT" : "POST", body: JSON.stringify(document) });
     closeEditor();
@@ -116,7 +116,7 @@ async function saveRecord() {
 async function deleteRecord(record) {
   if (!confirm(`Delete record "${record._id}"? This cannot be undone.`)) return;
   try {
-    await api(`/api/records?collection=${encodeURIComponent(activeCollection)}&id=${encodeURIComponent(record._id)}`, {method:"DELETE"});
+    await api(`https://my-project-acme-e57a1.vercel.app/api/records?collection=${encodeURIComponent(activeCollection)}&id=${encodeURIComponent(record._id)}`, {method:"DELETE"});
     toast("Record deleted.");
     await Promise.all([loadCollection(activeCollection, $("search-input").value), loadStats()]);
   } catch(e) { toast(e.message); }
