@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102d4f">
+  <title>URA Tax Administration</title>
+  <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">URA</div><div><strong>Tax Administration</strong><small>DATA MANAGEMENT PORTAL</small></div></div>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="overview"><span>▦</span> Overview</button>
+      <div class="side-label">DATABASE COLLECTIONS</div>
+      <button class="nav-item collection-link" data-collection="taxpayers"><span>♙</span> Taxpayers <b id="nav-taxpayers">—</b></button>
+      <button class="nav-item collection-link" data-collection="tax_assessments"><span>▤</span> Tax assessments <b id="nav-tax_assessments">—</b></button>
+      <button class="nav-item collection-link" data-collection="tax_incentives_exemptions"><span>◇</span> Tax incentives <b id="nav-tax_incentives_exemptions">—</b></button>
+      <button class="nav-item collection-link" data-collection="efris_transactions"><span>⇄</span> EFRIS transactions <b id="nav-efris_transactions">—</b></button>
+      <div class="sidebar-bottom"><div class="connection-dot" id="side-dot"></div><div><strong id="side-status">Checking database</strong><small>MongoDB Atlas</small></div></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><div class="eyebrow">URA / DATA WORKSPACE</div><h1 id="page-title">Overview</h1></div><div class="top-actions"><span class="status-pill" id="connection-status"><i></i> Checking connection</span><button class="icon-button" id="refresh-btn" title="Refresh data">↻</button></div></header>
+      <section id="overview-view">
+        <div class="welcome"><div><div class="eyebrow light">DATABASE OVERVIEW</div><h2>Tax administration at a glance</h2><p>Monitor taxpayer records, assessments, incentives and EFRIS activity.</p></div><div class="welcome-icon">▦</div></div>
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total records</span><span class="stat-icon blue">▤</span></div><strong id="stat-total">—</strong><small>Across all collections</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Taxpayers</span><span class="stat-icon teal">♙</span></div><strong id="stat-taxpayers">—</strong><small>Registered taxpayer records</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Tax assessments</span><span class="stat-icon violet">▧</span></div><strong id="stat-tax_assessments">—</strong><small>Assessment records</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Tax incentives</span><span class="stat-icon amber">◇</span></div><strong id="stat-tax_incentives_exemptions">—</strong><small>Exemption and incentive records</small></article>
+          <article class="stat-card"><div class="stat-top"><span>EFRIS transactions</span><span class="stat-icon green">⇄</span></div><strong id="stat-efris_transactions">—</strong><small>Fiscal transaction records</small></article>
+        </div>
+        <section class="panel quick-panel"><div class="panel-heading"><div><h3>Explore collections</h3><p>Select a collection to inspect and manage its records.</p></div></div><div class="collection-tiles">
+          <button class="collection-tile" data-collection="taxpayers"><span class="tile-icon teal">♙</span><span><strong>Taxpayers</strong><small>Taxpayer profiles and registration</small></span><b>→</b></button>
+          <button class="collection-tile" data-collection="tax_assessments"><span class="tile-icon violet">▧</span><span><strong>Tax assessments</strong><small>Tax periods, liabilities and status</small></span><b>→</b></button>
+          <button class="collection-tile" data-collection="tax_incentives_exemptions"><span class="tile-icon amber">◇</span><span><strong>Tax incentives</strong><small>Exemptions and applicable benefits</small></span><b>→</b></button>
+          <button class="collection-tile" data-collection="efris_transactions"><span class="tile-icon blue">⇄</span><span><strong>EFRIS transactions</strong><small>Fiscal documents and transaction values</small></span><b>→</b></button>
+        </div></section>
+      </section>
+      <section id="collection-view" hidden>
+        <div class="panel records-panel">
+          <div class="panel-heading records-heading"><div><h3 id="collection-heading">Taxpayers</h3><p id="collection-description">Browse and manage records in this collection.</p></div><button class="primary-btn" id="add-btn">＋ Add record</button></div>
+          <div class="table-toolbar"><div class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search records in this collection..."></div><div class="toolbar-right"><span id="record-count">0 records</span><button class="secondary-btn" id="reload-btn">↻ Refresh</button></div></div>
+          <div id="table-wrap" class="table-wrap"><div class="empty-state">Loading records...</div></div>
+          <div class="table-footer"><span id="table-footnote">Showing up to 100 records</span><button class="text-btn" id="back-btn">← Back to overview</button></div>
+        </div>
+      </section>
+      <footer>URA Tax Administration <span>Demonstration database interface</span></footer>
+    </main>
+  </div>
+  <div class="modal-backdrop" id="record-modal" hidden><section class="modal"><div class="modal-head"><div><div class="eyebrow">RECORD MANAGEMENT</div><h3 id="modal-title">Add record</h3></div><button class="close-btn" id="close-modal">×</button></div><p class="modal-help">Enter a valid JSON object. Keep nested fields as JSON objects or arrays.</p><label for="record-json">Record JSON</label><textarea id="record-json" spellcheck="false"></textarea><div class="modal-actions"><button class="secondary-btn" id="cancel-modal">Cancel</button><button class="primary-btn" id="save-record">Save record</button></div></section></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script type="module" src="/public/app.js"></script>
+</body></html>

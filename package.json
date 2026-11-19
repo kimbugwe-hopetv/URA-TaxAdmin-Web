@@ -1,0 +1,16 @@
+{
+  "name": "ura-taxadmin-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "mongodb": "^6.17.0"
+  },
+  "devDependencies": {
+    "vercel": "^41.7.8"
+  }
+}
