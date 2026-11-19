@@ -33,7 +33,7 @@ function setConnection(online) {
   $("side-status").textContent = online ? "Database connected" : "Connection unavailable";
 }
 async function checkConnection() {
-  try { await api("api/health.js"); setConnection(true); return true; }
+  try { await api("https://my-project-acme-e57a1.vercel.app/api/health"); setConnection(true); return true; }
   catch (e) { setConnection(false); return false; }
 }
 async function loadStats() {
