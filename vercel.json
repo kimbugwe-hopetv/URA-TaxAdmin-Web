@@ -1,10 +1,10 @@
 {
   "functions": {
     "api/*.js": {
-      "maxDuration": 10
-    },
-    {
-  "trailingSlash": false
-  }
+      "maxDuration": 10,
+          {
+       "trailingSlash": false
+    }
+    }
   }
 }
