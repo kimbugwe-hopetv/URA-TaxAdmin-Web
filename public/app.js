@@ -33,11 +33,11 @@ function setConnection(online) {
   $("side-status").textContent = online ? "Database connected" : "Connection unavailable";
 }
 async function checkConnection() {
-  try { await api("/api/health"); setConnection(true); return true; }
+  try { await api("/api/health.js"); setConnection(true); return true; }
   catch (e) { setConnection(false); return false; }
 }
 async function loadStats() {
-  const result = await api("/api/stats");
+  const result = await api("/api/stats.js");
   const d = result.data;
   $("stat-total").textContent = Number(d.total || 0).toLocaleString();
   Object.keys(collections).forEach(name => {
